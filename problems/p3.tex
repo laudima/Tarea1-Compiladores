@@ -13,11 +13,13 @@
     Para definir los prefijos de una expresión regular, podemos considerar las siguientes reglas:
 
     Podemos definir las reglas que aplicamos para cada una de las operaciones básicas de las expresiones regulares, 
-    si tenemos que $R$ y $S$ son expresiones regulares, entonces:
+    si tenemos que $R$ y $S$ son expresiones regulares y $a$ es un símbolo, entonces:
     \begin{align*}
-        prefix(RS) = prefix(R) \cup R \circ prefix(S)\\
-        prefix(R|S) = prefix(R) \cup prefix(S)\\
-        prefix(R*) = R^*prefix(R)
+        prefix(\epsilon) & = \{\epsilon\}\\
+        prefix(a) & = \{\epsilon, a\}\\
+        prefix(RS) & = prefix(R) \cup R \circ prefix(S)\\
+        prefix(R|S) & = prefix(R) \mid prefix(S)\\
+        prefix(R*) & = R^* \circ prefix(R)
     \end{align*}
 
 \end{proof}

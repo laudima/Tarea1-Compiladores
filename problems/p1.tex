@@ -40,17 +40,38 @@ z = i+j;
     \hspace{5mm}
 
 \begin{table}[h!]
+\centering
 \begin{tabular}{lll}
 Variable                    & Scope    & Comentario                                                 \\
 int i =4                    & Bloque 1 & Nueva variable                                             \\
 int j = 5                   & Bloque 1 & Nueva variable                                             \\
 int j = 7                   & Bloque 2 & Nueva variable, solo queda en el Bloque 2                  \\ 
 i=6                         & Bloque 2 & Afecta al Bloque 1                                         \\
-x = 9                       & Bloque 1 & Afecta al Bloque 1                                         \\
+x = 6 + 5 = 11                       & Bloque 1 & Afecta al Bloque 1                                         \\
 int i =8                    & Bloque 3 & Nueva variable, solo queda en el Bloque 3                  \\
 y = 13                      & Bloque 3 & Afecta al Bloque 1                                         \\
 z = 6 + 5                   & Bloque 1 & El valor de i cambio, pero el de j es el del primer reglon \\
-Final                       &          & w = 13, x = 9, y = 13, z = 11                             
+Final                       &          & w = 13, x = 11, y = 13, z = 11                             
 \end{tabular}
+\caption{Tabla de símbolos y valores para el primer código estructurado por bloques}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lll}
+Variable                    & Scope    & Comentario                                                 \\
+int i =3                    & Bloque 1 & Nueva variable                                             \\
+int j =4                    & Bloque 1 & Nueva variable                                             \\
+int i = 5                   & Bloque 1 & Afecta solo al Bloque 1                                   \\
+w = 5 + 4                   & Bloque 2 & Asignación, afecta al bloque 1                             \\ 
+x = 3 + 4                   & Bloque 1 & Asignación, afecta al bloque 1                             \\ 
+j=6                         & Bloque 3 & Afecta al Bloque 3                                         \\
+i= 7                        & Bloque 3 & Afecta al Bloque 1                                         \\
+int i =8                    & Bloque 3 & Nueva variable, solo queda en el Bloque 3                  \\
+y = 7 + 6 = 13              & Bloque 3 & Afecta al Bloque 1                                         \\
+z = 7 + 4 = 11              & Bloque 1 & El valor de i cambio, pero el de j es el del primer reglón \\
+Final                       &          & w = 9, x = 7, y = 13, z = 11                             
+\end{tabular}
+\caption{Tabla de símbolos y valores para el segundo código estructurado por bloques}
 \end{table}
 \end{proof}

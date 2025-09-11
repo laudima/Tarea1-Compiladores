@@ -1,0 +1,16 @@
+\begin{Pro}
+    Para las siguientes expresiones regulares, da el lenguaje que definen: 
+    \begin{enumerate}
+        \item $[ab][cd\epsilon]$ 
+        \item $[a-zA-Z]^*at^*$
+        \item $ca[tr]$
+    \end{enumerate}
+\end{Pro}
+\begin{proof}
+    \hspace{1cm}
+    \begin{enumerate}
+        \item $[ab][cd\epsilon]$ define el lenguaje $\{a,b,ac,ad,bc, bd\}$
+        \item $[a-zA-Z]^*at^*$ define el lenguaje de (letras)a$t^*$, es decir,todas cadenas de letras seguidas de \texttt{a} y luego de cero o más \texttt{t}. Por ejemplo: \texttt{at}, \texttt{bat}, \texttt{cat}, \texttt{a}, \texttt{rattt}, etc.
+        \item $ca[tr]$ define el lenguaje $\{cat, car\}$
+    \end{enumerate}
+\end{proof}
