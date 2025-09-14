@@ -1,3 +1,4 @@
+\newpage
 \begin{Pro}
    Convierte las siguientes expresiones regulares en autómatas finitos deterministas (DFA):
    \begin{enumerate}
@@ -9,7 +10,42 @@
 
 \begin{enumerate}
     \item $[ab]^*$
+    Primero aplicamos el algoritmo de Thompson para construir el AFN:
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/nfa7.drawio.png}
+        \caption{Automata Finito No Determinista, ejercicio 7 a}
+    \end{figure}
 
+    Donde $q_4$ es el estado inicial y $q_5$ es el estado final.
+
+    Ahora convertimos el AFN en un AFD: 
+
+    \begin{align*}
+        \epsilon-Cerradura(q_4) &= \{q_4,q_0, q_5\} && \leftarrow S_0 \\
+        \epsilon-Cerradura(S_0) &= \{q_4,q_0, q_5\} \\
+        \delta(S_0,a) &= \{q_1\} \cup \epsilon-Cerradura(q_1) 
+        = \{q_1, q_2\} && \leftarrow S_1 \\
+        \delta(S_0,b) &= \emptyset \\ 
+        \delta(S_1,a) &= \emptyset \\
+        \delta(S_1,b) &= \{q_3\} \cup \epsilon-Cerradura(q_3)
+        &= \{q_3, q_5, q_0\} && \leftarrow S_2 \\
+        \delta(S_2,a) &= \{q_1\} \cup \epsilon-Cerradura(q_1)
+        &= \{q_1, q_2\} = S_1 \\
+        \delta(S_2,b) &= \emptyset \\
+    \end{align*}
+
+    Entonces el AFD queda así:
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/dfa7.drawio.png}
+        \caption{Automata Finito Determinista, ejercicio 7 a}
+    \end{figure}
+
+    El estado inicial es $S_0$ y los estados finales son $S_0$ y $S_2$.
+
+    \newpage
     \item $(a?b^*)^*$
     Vamos a construir primero el AFN, con el algoritmo de Thompson:
     
