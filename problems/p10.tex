@@ -263,10 +263,7 @@ Vamos a hacer la prueba del AFD mínimo con las expresiones dadas. Seguiremos la
 \begin{enumerate}
     \item \textbf{Inicio:} Se empieza en el estado inicial del autómata y en el primer carácter de la cadena pendiente de procesar.
 
-    \item \textbf{Consumo y Registro:} Se lee un carácter a la vez y se avanza al siguiente estado según las transiciones del autómata.
-    \begin{itemize}
-        \item \textbf{Importante:} Cada vez que se pasa por un estado de aceptación, se guardan en una variable dos cosas: el tipo de token de ese estado (ej: CONST, VAR) y la posición actual en la cadena.
-    \end{itemize}
+    \item \textbf{Consumo y Registro:} Se lee un carácter a la vez y se avanza al siguiente estado según las transiciones del autómata. Cada vez que se pasa por un estado de aceptación, se guardan en una variable dos cosas: el tipo de token de ese estado (ej: CONST, VAR) y la posición actual en la cadena.
 
     \item \textbf{Avance hasta atorarse:} Se siguen consumiendo caracteres hasta encontrar una situación donde, para el siguiente carácter de la entrada, no existe una transición válida desde el estado actual. A esto se le llama atorarse o llegar a un estado de error/sumidero.
 
@@ -276,7 +273,7 @@ Vamos a hacer la prueba del AFD mínimo con las expresiones dadas. Seguiremos la
         \item El tipo de token es el que se guardó en ese momento.
     \end{itemize}
 
-    \item \textbf{Emisión y Repetición:} Se "emite" el token encontrado. Luego, el puntero de la cadena de entrada se mueve al carácter que sigue al final de ese token y se vuelve a empezar el proceso desde el paso 1.
+    \item \textbf{Emisión y Repetición:} Se emite el token encontrado. Luego, el puntero de la cadena de entrada se mueve al carácter que sigue al final de ese token y se vuelve a empezar el proceso desde el paso 1.
 \end{enumerate}
 
 
@@ -307,5 +304,116 @@ Vamos a hacer la prueba del AFD mínimo con las expresiones dadas. Seguiremos la
 
 
     \item[(b)] $\textbf{True} \land \lnot(p \lor q)$
+    
+    \begin{itemize}
+        \item Comenzamos leyendo 'T', nos movemos al estado $G_{3}$, luego 'r' a $G_{4}$, 'u' a $G_{5}$, 'e' a $G_{const}$ (aceptación CONST), guardamos token CONST y posición 4.
+        \item Leemos espacio ' ', no hay transición desde $G_{const}$, nos atoramos.
+        \item Retrocedemos a posición 4, emitimos token CONST con valor 'True'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter '$\land$', nos movemos al estado $G_{binop}$ (aceptación BINOP), guardamos token BINOP y posición 6.
+        \item Leemos espacio ' ', no hay transición desde $G_{binop}$, nos atoramos.
+        \item Retrocedemos a posición 6, emitimos token BINOP con valor '$\land$'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter '$\lnot$', nos movemos al estado $G_{binop}$ (aceptación BINOP), guardamos token BINOP y posición 8.
+        \item Leemos '(' y no hay transición desde $G_{binop}$, nos atoramos.
+        \item Retrocedemos a posición 8, emitimos token BINOP con valor '$\lnot$'.
+        \item Avanzamos al siguiente carácter '(', nos movemos al estado $G_{punct}$ (aceptación PUNCT), guardamos token PUNCT y posición 9.
+        \item Leemos 'p', no hay transición desde $G_{punct}$, nos atoramos.
+        \item Retrocedemos a posición 9, emitimos token PUNCT con valor '('.
+        \item Avanzamos al siguiente carácter 'p', nos movemos al estado $G_{var}$ (aceptación VAR), guardamos token VAR y posición 10.
+        \item Leemos espacio ' ', no hay transición desde $G_{var}$, nos atoramos.
+        \item Retrocedemos a posición 10, emitimos token VAR con valor 'p'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter '$\lor$', nos movemos al estado $G_{binop}$ (aceptación BINOP), guardamos token BINOP y posición 12.
+        \item Leemos espacio ' ', no hay transición desde $G_{binop}$, nos atoramos.
+        \item Retrocedemos a posición 12, emitimos token BINOP con valor '$\lor$'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter 'q', nos movemos al estado $G_{var}$ (aceptación VAR), guardamos token VAR y posición 14.
+        \item Leemos ')', no hay transición desde $G_{var}$, nos atoramos.
+        \item Retrocedemos a posición 14, emitimos token VAR con valor 'q'.
+        \item Avanzamos al siguiente carácter ')', nos movemos al estado $G_{punct}$ (aceptación PUNCT), guardamos token PUNCT y posición 15.
+        \item Llegamos al final de la cadena, emitimos token PUNCT con valor ')'.
+    \item \textbf{Tokens emitidos:}
+        \begin{itemize}
+            \item CONST: 'True'
+            \item BINOP: '$\land$'
+            \item BINOP: '$\lnot$'
+            \item PUNCT: '('     
+            \item VAR: 'p'
+            \item BINOP: '$\lor$'
+            \item VAR: 'q'
+            \item PUNCT: ')'
+        \end{itemize}
+    \end{itemize}
+
     \item[(c)] $\lnot(x \land y) \lor (p \land q)$
+    
+    \begin{itemize}
+        \item Comenzamos leyendo '$\lnot$', nos movemos al estado $G_{binop}$ (aceptación BINOP), guardamos token BINOP y posición 1.
+        \item Leemos '(', no hay transición desde $G_{binop}$, nos atoramos.
+        \item Retrocedemos a posición 1, emitimos token BINOP con valor '$\lnot$'.
+        \item Avanzamos al siguiente carácter '(', nos movemos al estado $G_{punct}$ (aceptación PUNCT), guardamos token PUNCT y posición 2.
+        \item Leemos 'x', no hay transición desde $G_{punct}$, nos atoramos.
+        \item Retrocedemos a posición 2, emitimos token PUNCT con valor '('.
+        \item Avanzamos al siguiente carácter 'x', nos movemos al estado $G_{var}$ (aceptación VAR), guardamos token VAR y posición 3.
+        \item Leemos espacio ' ', no hay transición desde $G_{var}$, nos atoramos.
+        \item Retrocedemos a posición 3, emitimos token VAR con valor 'x'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter '$\land$', nos movemos al estado $G_{binop}$ (aceptación BINOP), guardamos token BINOP y posición 5.
+        \item Leemos espacio ' ', no hay transición desde $G_{binop}$, nos atoramos.
+        \item Retrocedemos a posición 5, emitimos token BINOP con valor '$\land$'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter 'y', nos movemos al estado $G_{var}$ (aceptación VAR), guardamos token VAR y posición 7.
+        \item Leemos ')', no hay transición desde $G_{var}$, nos atoramos.
+        \item Retrocedemos a posición 7, emitimos token VAR con valor 'y'.
+        \item Avanzamos al siguiente carácter ')', nos movemos al estado $G_{punct}$ (aceptación PUNCT), guardamos token PUNCT y posición 8.
+        \item Leemos espacio ' ', no hay transición desde $G_{punct}$, nos atoramos.
+        \item Retrocedemos a posición 8, emitimos token PUNCT con valor ')'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter '$\lor$', nos movemos al estado $G_{binop}$ (aceptación BINOP), guardamos token BINOP y posición 10.
+        \item Leemos espacio ' ', no hay transición desde $G_{binop}$, nos atoramos.
+        \item Retrocedemos a posición 10, emitimos token BINOP con valor '$\lor$'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter '(', nos movemos al estado $G_{punct}$ (aceptación PUNCT), guardamos token PUNCT y posición 12.
+        \item Leemos 'p', no hay transición desde $G_{punct}$, nos atoramos.
+        \item Retrocedemos a posición 12, emitimos token PUNCT con valor '('.
+        \item Avanzamos al siguiente carácter 'p', nos movemos al estado $G_{var}$ (aceptación VAR), guardamos token VAR y posición 13.
+        \item Leemos espacio ' ', no hay transición desde $G_{var}$, nos atoramos.
+        \item Retrocedemos a posición 13, emitimos token VAR con valor 'p'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter '$\land$', nos movemos al estado $G_{binop}$ (aceptación BINOP), guardamos token BINOP y posición 15.
+        \item Leemos espacio ' ', no hay transición desde $G_{binop}$, nos atoramos.
+        \item Retrocedemos a posición 15, emitimos token BINOP con valor '$\land$'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter 'q', nos movemos al estado $G_{var}$ (aceptación VAR), guardamos token VAR y posición 17.
+        \item Leemos ')', no hay transición desde $G_{var}$, nos atoramos.
+        \item Retrocedemos a posición 17, emitimos token VAR con valor 'q'.
+        \item Avanzamos al siguiente carácter ')', nos movemos al estado $G_{punct}$ (aceptación PUNCT), guardamos token PUNCT y posición 18.
+        \item Llegamos al final de la cadena, emitimos token PUNCT con valor ')'.
+    \item \textbf{Tokens emitidos:}
+        \begin{itemize}
+            \item BINOP: '$\lnot$'
+            \item PUNCT: '('
+            \item VAR: 'x'
+            \item BINOP: '$\land$'
+            \item VAR: 'y'
+            \item PUNCT: ')'
+            \item BINOP: '$\lor$'
+            \item PUNCT: '('
+            \item VAR: 'p'
+            \item BINOP: '$\land$'
+            \item VAR: 'q'
+            \item PUNCT: ')'
+        \end{itemize}
+    \end{itemize}
 \end{enumerate}
