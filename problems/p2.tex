@@ -12,36 +12,45 @@ Divide el siguiente programa en C++ en lexemas y genera los tokens correspondien
     \hspace{5mm}
 
 Después del escaneo no tenemos comentarios. Ni espacios en blanco. 
-Lexemas: \texttt{float, limitedSquare, (, x, ), float, x, ;,{, return, (, x, <=, -10.0, ||, x, >=, 10.0, ), ?, 100, :, x, *, x, ;, }}
+Un token es una pareja $$<tipo, valor>$$
 
-Tokens:
+Tenemos los siguientes tipos de tokens:
+\begin{itemize}
+    \item Keywords (Kw) como \texttt{return, if, else, while, ...}
+    \item Operadores (Op) como \texttt{+, -, *, /, =, ==, <=, >=, ...}
+    \item Identificadores (Id) como \texttt{variable1, funcion2, ...}
+    \item Constantes (Const) como \texttt{3, 4.5, 'a', "hola", ...}
+    \item Símbolos de puntuación (Punct) como \texttt{(, ), {, }, ;, ...}
+\end{itemize}
+
+En este caso tenemos los siguientes tokens:
 \begin{lstlisting}
-<float>
-<id, limitedSquare>
-<(>
-<id, x>
-<)>
-<float>
-<id, x>
-<;>
-<{>
-<return>
-<(>
-<id, x>
-<<=>
-<float,-10.0>
-<||>
-<id, x>
-<>=>
-<float,10.0>
-<)>
-<?>
-<100>
-<:>
-<id, x>
-<*>
-<id, x>
-<;>
-<}>
+<Kw, float> 
+<Id, limitedSquare>
+<Punct, (>
+<Id, x>
+<Punct, )>
+<Kw, float>
+<Id, x>
+<Punct, ;>
+<Punct, {>
+<Kw, return>
+<Punct, (>
+<Id, x>
+<Op, <=>
+<Const, -10.0>
+<Op, ||>
+<Id, x>
+<Op, >=>
+<Const, 10.0>
+<Punct, )>
+<Op, ?>
+<Const, 100>
+<Op, :>
+<Id, x>
+<Op, *>
+<Id, x>
+<Punct, ;>
+<Punct, }>
 \end{lstlisting}
 \end{proof}
