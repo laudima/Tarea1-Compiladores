@@ -109,3 +109,98 @@ Note que la transición de $A$ al estado $\{q_6\}$ se da con las letras $r, u, a
 \end{figure}
 
 
+\textbf{Minimización del AFD}
+
+Para minimizar el AFD, primero separamos los estados en dos grupos: los estados de aceptación y los que no lo son.
+
+\begin{itemize}
+    \item Grupo 1 (aceptación): $\{\{q_5, q_6, q_7, q_8\}\}$
+    \item Grupo 2 (no aceptación): $\{A, \{q_9\}, \{q_{10}\}, \{q_{11}\}, \{q_{12}\}, \{q_{13}\}, \{q_{14}\}, \{q_{15}\}\}$
+\end{itemize}
+
+Como en el grupo 1 todos los estados son de aceptación, y no tienen transiciones es un grupo consistente. Ahora veamos como se comportarían los estados del Grupo 2 con las entradas posibles: 
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Estado &T & r & u & e & F & a & l &s &[a-z]-[r,u,e,a,l,s] &$\land/\lor/\lnot$ & (, )\\ \hline
+\hline
+$A$ & $\{q_9\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_{6}\}$ & $\{q_{12}\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_7\}$& $\{q_8\}$\\ \hline
+$\{q_9\}$ & $\emptyset$ & $\{q_{10}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{10}\}$ & $\emptyset$ &  $\emptyset$&  $\{q_{11}\}$& $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{11}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ &  $\{q_{5}\}$& $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{12}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$  & $\{q_{13}\}$ & $\emptyset$ & $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{13}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\{q_{14}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{14}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\{q_{15}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{15}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\{q_{5}\}$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+\end{tabular}
+\end{table}
+
+Ahora si podemos los grupos de estados que se comportan igual:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Estado &T & r & u & e & F & a & l &s &[a-z]-[r,u,e,a,l,s] &$\land/\lor/\lnot$ & (, )\\ \hline
+\hline
+$A$ & $ G_2$ & $ G_1$ & $G_1$ & $G_1$ & $G_2$ & $G_1$ & $G_1$ & $G_1$ & $G_1$ & $G_1$& $G_1$\\ \hline
+$\{q_9\}$ & $\emptyset$ & $G_2$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{10}\}$ & $\emptyset$ &  $\emptyset$&  $G_2$& $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{11}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ &  $G_1$& $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{12}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$  & $G_2$ & $\emptyset$ & $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{13}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $G_2$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{14}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $G_2$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{15}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $G_1$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+\end{tabular}
+\end{table}
+
+
+Con la tabla anterior podemos agrupar los estados en los siguientes grupos:
+\begin{itemize}
+    \item $G_1 = \{\{q_6\}, \{q_7\}, \{q_8\}, \{q_5\}\}$
+    \item $G_2 = \{A\}$
+    \item $G_3 = \{q_9\}$
+    \item $G_4 = \{q_{10}\}$
+    \item $G_5 = \{q_{11},q_{15}\}$
+    \item $G_6 = \{q_{12}\}$
+    \item $G_7 = \{q_{13}\}$
+    \item $G_8 = \{q_{14}\}$
+\end{itemize}
+
+Veamos como se comportarían los estados del Grupo $G_5$ con las entradas posibles:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Estado &T & r & u & e & F & a & l &s &[a-z]-[r,u,e,a,l,s] &$\land/\lor/\lnot$ & (, )\\ \hline
+\hline
+$\{q_{11}\}$ & &  $\emptyset$& $\emptyset$ &  $G_1$& $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{15}\}$ & &  $\emptyset$& $\emptyset$ & $G_1$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+\end{tabular}
+\end{table}
+
+Como son consistentes, y todos los otros grupos son unitarios, ya tenemos la tabla de transiciones del AFD mínimo:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Estado &T & r & u & e & F & a & l &s &[a-z]-[r,u,e,a,l,s] &$\land/\lor/\lnot$ & (, )\\ \hline
+\hline
+$G_2$ & $ G_3$ & $ G_1$ & $G_1$ & $G_1$ & $G_6$ & $G_1$ & $G_1$ & $G_1$ & $G_1$ & $G_1$ & $G_1$\\ \hline
+$G_1$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset $ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$G_3$ & $\emptyset$ & $G_4$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$G_4$ & $\emptyset$ &  $\emptyset$&  $G_5$& $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$G_5$ & $\emptyset$ &  $\emptyset$& $\emptyset$ &  $G_1$& $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$G_6$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$  & $G_7$ & $\emptyset$ & $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$G_7$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $G_8$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$G_8$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $G_5$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+\end{tabular}
+\caption{Tabla de transiciones del AFD mínimo}
+\end{table}
+
+Y el AFD mínimo queda así:
+
