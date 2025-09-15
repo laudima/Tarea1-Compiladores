@@ -13,37 +13,52 @@
     Primero aplicamos el algoritmo de Thompson para construir el AFN:
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=0.5\textwidth]{images/nfa7.drawio.png}
+        \includegraphics[width=0.5\textwidth]{images/7a.png}
         \caption{Automata Finito No Determinista, ejercicio 7 a}
-    \end{figure}
+    \end{figure}\\
+    donde el estado inicial es $6$ y el estado final es $7$.
 
-    Donde $q_4$ es el estado inicial y $q_5$ es el estado final.
-
-    Ahora convertimos el AFN en un AFD: 
-
-    \begin{align*}
-        \epsilon-Cerradura(q_4) &= \{q_4,q_0, q_5\} && \leftarrow S_0 \\
-        \epsilon-Cerradura(S_0) &= \{q_4,q_0, q_5\} \\
-        \delta(S_0,a) &= \{q_1\} \cup \epsilon-Cerradura(q_1) 
-        = \{q_1, q_2\} && \leftarrow S_1 \\
-        \delta(S_0,b) &= \emptyset \\ 
-        \delta(S_1,a) &= \emptyset \\
-        \delta(S_1,b) &= \{q_3\} \cup \epsilon-Cerradura(q_3)
-        &= \{q_3, q_5, q_0\} && \leftarrow S_2 \\
-        \delta(S_2,a) &= \{q_1\} \cup \epsilon-Cerradura(q_1)
-        &= \{q_1, q_2\} = S_1 \\
-        \delta(S_2,b) &= \emptyset \\
-    \end{align*}
-
-    Entonces el AFD queda así:
-
+    Ahora convertimos el AFN en un AFD:
+    Primero vamos a sacar las epsilon cerradura de cada estado:
+    \begin{itemize}
+        \item $\epsilon$-Cerradura($6$) = $\{0,1,2,6,7\}$
+        \item $\epsilon$-Cerradura($1$) = $\{1\}$
+        \item $\epsilon$-Cerradura($2$) = $\{2\}$
+        \item $\epsilon$-Cerradura($3$) = $\{0,1,2,3,5,7\}$
+        \item $\epsilon$-Cerradura($4$) = $\{0,1,2,4,5,7\}$
+        \item $\epsilon$-Cerradura($5$) = $\{0,1, 2, 5, 7\}$
+        \item $\epsilon$-Cerradura($7$) = $\{0,1,2, 7\}$
+    \end{itemize}
+    \newpage
+    Ahora vamos a construir la tabla de transiciones del AFD:\\
+    \begin{table}[h!]        
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Estados} & \textbf{Transición con a} & \textbf{Transición con b } \\
+    \hline
+    $\epsilon$-Cerradura($6$) &$\epsilon$-Cerradura($3$) & $\epsilon$-Cerradura($4$)\\
+    \hline      
+    $\epsilon$-Cerradura($3$) & $\epsilon$-Cerradura($3$) & $\epsilon$-Cerradura($4$) \\
+    \hline 
+    $\epsilon$-Cerradura($4$) & $\epsilon$-Cerradura($3$) & $\epsilon$-Cerradura($4$) \\
+    \hline
+    \end{tabular}
+    \caption{Tabla de transiciones del AFD} 
+    \end{table}\\
+    Entonces el AFD queda así:\\
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=0.5\textwidth]{images/dfa7.drawio.png}
+        \includegraphics[width=0.5\textwidth]{images/7aDFA.png}
         \caption{Automata Finito Determinista, ejercicio 7 a}
-    \end{figure}
+    \end{figure}\\
+    Si lo minimizamos, queda así:
 
-    El estado inicial es $S_0$ y los estados finales son $S_0$ y $S_2$.
+    \begin{figure}[!ht]  
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/7bDFAminimo.png}
+        \caption{Automata Finito Determinista Mínimo, ejercicio 7 a}
+    \end{figure}
 
     \newpage
     \item $(a?b^*)^*$
