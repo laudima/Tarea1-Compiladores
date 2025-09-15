@@ -202,17 +202,108 @@ $G_8$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $
 \caption{Tabla de transiciones del AFD mínimo}
 \end{table}
 
-Y el AFD mínimo queda así:
 
 
 
-Vamos a hacer la prueba del AFD mínimo con las expresiones del enunciado, para ello debemos seguir la regla de la coincidencia más larga, es decir, si hay dos posibles transiciones, se elige la que consuma más caracteres de la cadena de entrada. Hay que avanzar hasta que no se pueda avanzar más, y si el estado en el que se encuentra es de aceptación, la cadena es aceptada.
+
+Como queremos distinguir cada uno de los estados de aceptación, vamos a renombrar los grupos de la siguiente manera:
+
+
+Con la tabla anterior podemos agrupar los estados en los siguientes grupos:
+\begin{itemize}
+    \item $G_{const}$ =  $\{q_5\}$
+    \item $G_{var}$ =  $\{q_6\}$
+    \item $G_{binop}$ =  $\{q_7\}$
+    \item $G_{punct}$ =  $\{q_8\}$
+    \item $G_2 = \{A\}$
+    \item $G_3 = \{q_9\}$
+    \item $G_4 = \{q_{10}\}$
+    \item $G_5 = \{q_{11},q_{15}\}$
+    \item $G_6 = \{q_{12}\}$
+    \item $G_7 = \{q_{13}\}$
+    \item $G_8 = \{q_{14}\}$
+\end{itemize}
+
+Veamos la tabla de transiciones final del AFD mínimo:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    Estado &T & r & u & e & F & a & l &s &[a-z]-[r,u,e,a,l,s] &$\land/\lor/\lnot$ & (, )\\ \hline
+    \hline
+    $G_2$ & $ G_3$ & $ G_{var}$ & $G_{var}$ & $G_{var}$ & $G_6$ & $G_{var}$ & $G_{var}$ & $G_{var}$ & $G_{var}$ & $G_{binop}$ & $G_{punct}$\\ \hline
+    $G_{const}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset $ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_{var}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset $ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_{binop}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset $ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_{punct}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset $ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_3$ & $\emptyset$ &  $G_4$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_4$ & $\emptyset$ &  $\emptyset$&  $G_5$& $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_5$ & $\emptyset$ &  $\emptyset$& $\emptyset$ &  $G_{const}$& $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_6$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$  & $G_7$ & $\emptyset$ & $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_7$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $G_8$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    $G_8$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $G_5$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+    \end{tabular}
+    \caption{Tabla de transiciones del AFD mínimo renombrado}
+\end{table}
+
+
+Obtenemos entonces el siguiente autómata:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/ej10-3.jpeg}
+    \caption{AFD mínimo para lexer expresiones booleanas}
+    \label{fig:my_label}
+\end{figure}
+
+
+Vamos a hacer la prueba del AFD mínimo con las expresiones dadas. Seguiremos la regla de la coincidencia más larga.
+
+\begin{enumerate}
+    \item \textbf{Inicio:} Se empieza en el estado inicial del autómata y en el primer carácter de la cadena pendiente de procesar.
+
+    \item \textbf{Consumo y Registro:} Se lee un carácter a la vez y se avanza al siguiente estado según las transiciones del autómata.
+    \begin{itemize}
+        \item \textbf{Importante:} Cada vez que se pasa por un estado de aceptación, se guardan en una variable dos cosas: el tipo de token de ese estado (ej: CONST, VAR) y la posición actual en la cadena.
+    \end{itemize}
+
+    \item \textbf{Avance hasta atorarse:} Se siguen consumiendo caracteres hasta encontrar una situación donde, para el siguiente carácter de la entrada, no existe una transición válida desde el estado actual. A esto se le llama atorarse o llegar a un estado de error/sumidero.
+
+    \item \textbf{Retroceso y Corte:} Cuando se atoran, el proceso se detiene. En ese momento, se consulta el último estado de aceptación que fue guardado:
+    \begin{itemize}
+        \item El token encontrado es la subcadena que va desde el inicio del análisis hasta la posición guardada.
+        \item El tipo de token es el que se guardó en ese momento.
+    \end{itemize}
+
+    \item \textbf{Emisión y Repetición:} Se "emite" el token encontrado. Luego, el puntero de la cadena de entrada se mueve al carácter que sigue al final de ese token y se vuelve a empezar el proceso desde el paso 1.
+\end{enumerate}
+
+
 
 \begin{enumerate}
     \item[(a)] $p \land q$
     
-    Comenzamos en el estado $G_2$, con la entrada $p$ vamos al estado $G_1$, con la entrada $\land$ vamos al estado $G_1$, con la entrada $q$ vamos al estado $G_1$. Como el estado final es de aceptación, la cadena es aceptada.
-
+    \begin{itemize}
+        \item Comenzamos leyendo 'p', nos movemos al estado $G_{var}$ (aceptación VAR), guardamos token VAR y posición 1.
+        \item Leemos espacio ' ', no hay transición desde $G_{var}$, nos atoramos.
+        \item Retrocedemos a posición 1, emitimos token VAR con valor 'p'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter 'a', nos movemos al estado $G_{binop}$ (aceptación BINOP), guardamos token BINOP y posición 3.
+        \item Leemos espacio ' ', no hay transición desde $G_{binop}$, nos atoramos.
+        \item Retrocedemos a posición 3, emitimos token BINOP con valor '$\land$'.
+        \item Avanzamos al siguiente carácter (espacio), no hay transición desde estado inicial, nos atoramos.
+        \item No hay token guardado para el espacio.
+        \item Avanzamos al siguiente carácter 'q', nos movemos al estado $G_{var}$ (aceptación VAR), guardamos token VAR y posición 5.
+        \item Llegamos al final de la cadena, emitimos token VAR con valor 'q'.
+    \item \textbf{Tokens emitidos:}
+        \begin{itemize}
+            \item VAR: 'p'
+            \item BINOP: '$\land$'
+            \item VAR: 'q'
+        \end{itemize}
+    \end{itemize}
 
 
     \item[(b)] $\textbf{True} \land \lnot(p \lor q)$
