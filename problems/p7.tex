@@ -125,7 +125,69 @@
     Ahora vamos a construir el autómata para $[ab]^*abb[ab]^*$: \\
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=0.5\textwidth]{images/7c.png}
+        \includegraphics[width=0.5\textwidth]{images/7c.jpeg}
         \caption{Automata Finito Determinista, ejercicio 7 c}
     \end{figure}
+
+    La epsilon cerradura de cada estado es:
+    \begin{itemize}
+        \item $\epsilon$-Cerradura($q_0$) = $\{q_0\}$
+        \item $\epsilon$-Cerradura($q_1$) = $\{q_1\}$
+        \item $\epsilon$-Cerradura($q_2$) = $\{q_2\}$
+        \item $\epsilon$-Cerradura($q_3$) = $\{q_3\}$
+    \end{itemize}
+    Ahora vamos a construir la tabla de transiciones del AFD:
+
+    \begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Estados} & \textbf{a} & \textbf{b } \\
+    \hline
+    $A = \{q_0\}$ &$\{q_0, q_1\}$ & $\{q_0\}$ \\
+    \hline      
+    $B = \{q_0, q_1\}$ & $\{q_0, q_1\}$  & $\{q_0, q_2\}$  \\
+    \hline 
+    $C = \{q_0, q_2\}$ & $\{q_0, q_1\}$ & $\{q_0, q_3\}$  \\
+    \hline
+    $D = \{q_0, q_3\}$ & $\{q_0, q_1, q_3\}$  & $\{q_0, q_3\}$  \\
+    \hline
+    $E =\{q_0, q_1, q_3\}$ & $\{q_0, q_1, q_3\}$  & $\{q_0, q_2, q_3\}$  \\
+    \hline
+    $F = \{q_0, q_2, q_3\}$ & $\{q_0, q_1, q_3\}$  & $\{q_0, q_3\}$  \\
+    \hline
+    \end{tabular}
+    \caption{Tabla de transiciones del AFD} 
+    \end{table}
+
 \end{enumerate}
+
+Con las nuevas etiquetas la tabla de transiciones del AFD queda así:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Estados} & \textbf{a} & \textbf{b } \\
+    \hline
+    $A$ &$B$ & $A$ \\
+    \hline      
+    $B$ & $B$  & $C$  \\
+    \hline 
+    $C$ & $B$ & $D$  \\
+    \hline
+    $D$ & $E$  & $D$  \\
+    \hline
+    $E$ & $E$  & $F$  \\
+    \hline
+    $F$ & $E$  & $D$  \\
+    \hline
+    \end{tabular}
+    \caption{Tabla de transiciones del AFD} 
+    \end{table}
+Entonces el AFD queda así:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/7cDFA.jpeg}
+    \caption{Automata Finito Determinista, ejercicio 7 c}
+\end{figure}
