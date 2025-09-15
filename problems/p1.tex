@@ -63,15 +63,15 @@ Final                       &          & w = 13, x = 11, y = 13, z = 11, i = 6, 
 Variable                    & Scope    & Comentario                                                 \\
 int i =3                    & Bloque 1 & Nueva variable                                             \\
 int j =4                    & Bloque 1 & Nueva variable                                             \\
-int i = 5                   & Bloque 1 & Afecta solo al Bloque 1                                   \\
-w = 5 + 4                   & Bloque 2 & Asignación, afecta al bloque 1                             \\ 
+int i = 5                   & Bloque 2 & Afecta solo al Bloque 2                                   \\
+w = 5 + 4=9                 & Bloque 2 & Asignación, afecta al bloque 1                             \\ 
 x = 3 + 4                   & Bloque 1 & Asignación, afecta al bloque 1                             \\ 
 j=6                         & Bloque 3 & Afecta al Bloque 3                                         \\
 i= 7                        & Bloque 3 & Afecta al Bloque 1                                         \\
 int i =8                    & Bloque 3 & Nueva variable, solo queda en el Bloque 3                  \\
 y = 7 + 6 = 13              & Bloque 3 & Afecta al Bloque 1                                         \\
 z = 7 + 4 = 11              & Bloque 1 & El valor de i cambio, pero el de j es el del primer reglón \\
-Final                       &          & w = 9, x = 7, y = 13, z = 11                             
+Final                       &          & w = 9, x = 7, y = 13, z = 11, i = 7, j = 4                            
 \end{tabular}
 \caption{Tabla de símbolos y valores para el segundo código estructurado por bloques}
 \end{table}
