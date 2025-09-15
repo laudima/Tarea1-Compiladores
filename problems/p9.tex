@@ -1,3 +1,44 @@
 \begin{Pro}
+ Define un lexer para las expresiones booleanas que considere los siguientes puntos:
+
+
+\begin{enumerate}
+    \item[(a)] Que considere las constantes \textbf{True} y \textbf{False} como tokens \textbf{const}.
     
+    \item[(b)] Que considere las variables (\textbf{var}) $x, y, z, p, q, r$, etc.
+
+    \item[(c)] Que considere los operadores binarios (\textbf{binop}) básicos: $\land, \lor$ y $\lnot$.
+
+    \item[(d)] Define las regex de este para este lexer.
+\end{enumerate}
+
 \end{Pro}
+
+El trabajo del lexer solo es identificar los tokens en la cadena de entrada.
+
+Primero vamos a definir las regex para cada uno de los tokens que necesitamos:
+\begin{itemize}
+    \item Para constantes \textbf{True} y \textbf{False}:
+    \begin{align*}
+        const = [True | False]
+    \end{align*}
+
+    \item Para variables (\textbf{var}) $x, y, z, p, q, r$ solo consideramos de longitud 1 como suelen ser las variables en lógica proposicional:
+    \begin{align*}
+        var = [a-z]
+    \end{align*}
+
+    \item Para los operadores (\textbf{binop}) básicos: $\land, \lor$:
+    \begin{align*}
+        binop = [\land | \lor | \lnot]
+    \end{align*}
+ 
+
+    \item Para los signos de puntuación (\textbf{punct}): paréntesis de apertura y cierre:
+    \begin{align*}
+        punct = [ ( | ) ]
+    \end{align*}
+
+\end{itemize}
+
+
