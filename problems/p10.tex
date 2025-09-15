@@ -18,3 +18,94 @@ Para convertirlo en AF usando Thompson creamos un estado inicial y un estado fin
     \caption{AF para lexer expresiones booleanas}
     \label{fig:my_label}
 \end{figure}
+
+
+Primero vamos a obtener la epsilon-cerradura de cada uno de los estados:
+
+\begin{itemize}
+    \item $\epsilon-closure(\{q_0\}) = \{q_0, q_1, q_2, q_3, q_4\}$
+    \item $\epsilon-closure(\{q_1\}) = \{q_1\}$
+    \item $\epsilon-closure(\{q_2\}) = \{q_2\}$
+    \item $\epsilon-closure(\{q_3\}) = \{q_3\}$
+    \item $\epsilon-closure(\{q_4\}) = \{q_4\}$
+    \item $\epsilon-closure(\{q_5\}) = \{q_5\}$
+    \item $\epsilon-closure(\{q_6\}) = \{q_6\}$
+    \item $\epsilon-closure(\{q_7\}) = \{q_7\}$
+    \item $\epsilon-closure(\{q_8\}) = \{q_8\}$
+    \item $\epsilon-closure(\{q_9\}) = \{q_9\}$
+    \item $\epsilon-closure(\{q_{10}\}) = \{q_{10}\}$
+    \item $\epsilon-closure(\{q_{11}\}) = \{q_{11}\}$
+    \item $\epsilon-closure(\{q_{12}\}) = \{q_{12}\}$
+    \item $\epsilon-closure(\{q_{13}\}) = \{q_{13}\}$
+    \item $\epsilon-closure(\{q_{14}\}) = \{q_{14}\}$
+    \item $\epsilon-closure(\{q_{15}\}) = \{q_{15}\}$
+\end{itemize}
+
+Ahora vamos a obtener las transiciones de cada uno de los estados:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Estado &T & r & u & e & F & a & l &s &[a-z]-[r,u,e,a,l,s] &$\land/\lor/\lnot$ & (, )\\ \hline
+\hline
+$\{q_0, q_1, q_2, q_3, q_4\}$ & $\{q_9\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_{6}\}$ & $\{q_{12}\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_7\}$& $\{q_8\}$\\ \hline
+\end{tabular}
+\end{table}
+
+En este punto tenemos como nuevos estados $\{q_6\}, \{q_7\}, \{q_8\}, \{q_9\}, \{q_{12}\}$. Vamos a agregarlos a la tabla de transiciones:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Estado &T & r & u & e & F & a & l &s &[a-z]-[r,u,e,a,l,s] &$\land/\lor/\lnot$ & (, )\\ \hline
+\hline
+$\{q_0, q_1, q_2, q_3, q_4\}$ & $\{q_9\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_{6}\}$ & $\{q_{12}\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_7\}$& $\{q_8\}$\\ \hline
+$\{q_6\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_7\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_8\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_9\}$ & $\emptyset$ & $\{q_{10}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{12}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\{q_{13}\}$ & $\emptyset$ & $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+\end{tabular}
+\end{table}
+
+Continuamos con las nuevas transiciones que hemos obtenido y obtenemos la tabla completa:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Estado &T & r & u & e & F & a & l &s &[a-z]-[r,u,e,a,l,s] &$\land/\lor/\lnot$ & (, )\\ \hline
+\hline
+$\{q_0, q_1, q_2, q_3, q_4\}$ & $\{q_9\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_{6}\}$ & $\{q_{12}\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_6\}$ & $\{q_7\}$& $\{q_8\}$\\ \hline
+$\{q_6\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_7\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_8\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_9\}$ & $\emptyset$ & $\{q_{10}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{12}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$  & $\{q_{13}\}$ & $\emptyset$ & $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{10}\}$ & $\emptyset$ &  $\emptyset$&  $\{q_{11}\}$& $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{11}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ &  $\{q_{5}\}$& $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{13}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\{q_{14}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{14}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\{q_{15}\}$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{15}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\{q_{5}\}$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+$\{q_{5}\}$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\ \hline
+\end{tabular}
+
+\end{table}
+
+
+Llamaremos $A=\{q_0, q_1, q_2, q_3, q_4\}$ los demas estados al quedar unitarios conservaran su nombre. Tenemos entonces el siguiente AFD:
+
+
+Note que la transición de $A$ al estado $\{q_6\}$ se da con las letras $r, u, a, l, s$ y cualquier letra de la $a$ a la $z$ que no sea $r, u, e, a, l, s$. Por lo que podemos agruparlas en una sola transición con la etiqueta $[a-z]$. Habiendo aclarado esto, tenemos el siguiente AFD:
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/ejercicio10-2.jpg}
+    \caption{AFD para lexer expresiones booleanas}
+    \label{fig:my_label}
+\end{figure}
+
+
