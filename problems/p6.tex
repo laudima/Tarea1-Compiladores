@@ -88,9 +88,10 @@ El DFA mínimo es:
         \includegraphics[width=0.4\textwidth]{images/ejercicio6a.png}
         \caption{DFA mínimo, ejercicio 6a}
 \end{figure}
+\newpage
 
-    \item 
-    \begin{figure}[ht]
+    \item  : \\
+    \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{images/ejercicio6b.png}
         \caption{Automata Finito Determinista, ejercicio 6 b}
@@ -101,8 +102,8 @@ El DFA mínimo es:
         \item Grupo 2 (no aceptación): $\{q_0, q_1, q_2, q_3, q_5\}$
     \end{itemize}
 
-    Veamos como se comportarían los estados del Grupo 2 con las entradas posibles:
-    \begin{table}[ht]
+    Veamos como se comportarían los estados del Grupo 2 con las entradas posibles:\\
+    \begin{table}[h!]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
@@ -124,14 +125,14 @@ El DFA mínimo es:
     \end{table}
 
 
- Vamos a agrupar los estados que se comportan igual:
+ Vamos a agrupar los estados que se comportan igual:\\
  \begin{itemize}
     \item Grupo A: $\{q_0, q_2, q_5\}$
     \item Grupo B: $\{q_1\}$
     \item Grupo C: $\{q_3\}$
  \end{itemize}
-    Veamos como se comportarían los estados del Grupo A con las entradas posibles:      
-    \begin{table}[ht]
+    Veamos como se comportarían los estados del Grupo A con las entradas posibles:  \\    
+    \begin{table}[h!]
     \centering      
     \begin{tabular}{|c|c|c|}
     \hline
@@ -147,15 +148,15 @@ El DFA mínimo es:
     \caption{Tabla de ejemplo 6×3}
     \label{tab:ejemplo}
     \end{table} 
-    Ahora, agrupamos los estados que se comportan igual:
+    Ahora, agrupamos los estados que se comportan igual:\\
     \begin{itemize}     
         \item Grupo A1: $\{q_2, q_5\}$
         \item Grupo A2: $\{q_0\}$
         \item Grupo B: $\{q_1\}$
         \item Grupo C: $\{q_3\}$
     \end{itemize}
-    Veamos como se comportarían los estados del Grupo A1 con las entradas posibles:      
-    \begin{table}[ht]        
+    Veamos como se comportarían los estados del Grupo A1 con las entradas posibles:   \\   
+    \begin{table}[h!]        
     \centering      
     \begin{tabular}{|c|c|c|}        
     \hline
@@ -169,7 +170,7 @@ El DFA mínimo es:
     \caption{Tabla de ejemplo 6×3}
     \label{tab:ejemplo} 
     \end{table}
-    Notemos que ambos estados se comportan igual, por lo que no es posible seguir dividiendo los grupos. Por lo tanto, los grupos finales son:
+    Notemos que ambos estados se comportan igual, por lo que no es posible seguir dividiendo los grupos. Por lo tanto, los grupos finales son:\\
     \begin{itemize} 
         \item Grupo A1: $\{q_2, q_5\}$
         \item Grupo A2: $\{q_0\}$
@@ -177,8 +178,8 @@ El DFA mínimo es:
         \item Grupo C: $\{q_3\}$
         \item Grupo D (aceptación): $\{q_4\}$   
     \end{itemize}
-    Ahora, construimos el DFA mínimo usando estos grupos como estados:
-    \begin{figure}[ht]
+    Ahora, construimos el DFA mínimo usando estos grupos como estados: \\
+    \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{images/6bresuelto.png}
         \caption{Automata Finito Determinista Minimo, ejercicio 6 b}
