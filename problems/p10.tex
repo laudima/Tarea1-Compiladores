@@ -204,3 +204,17 @@ $G_8$ & $\emptyset$ &  $\emptyset$& $\emptyset$ & $\emptyset$ & $\emptyset$  & $
 
 Y el AFD mínimo queda así:
 
+
+
+Vamos a hacer la prueba del AFD mínimo con las expresiones del enunciado, para ello debemos seguir la regla de la coincidencia más larga, es decir, si hay dos posibles transiciones, se elige la que consuma más caracteres de la cadena de entrada. Hay que avanzar hasta que no se pueda avanzar más, y si el estado en el que se encuentra es de aceptación, la cadena es aceptada.
+
+\begin{enumerate}
+    \item[(a)] $p \land q$
+    
+    Comenzamos en el estado $G_2$, con la entrada $p$ vamos al estado $G_1$, con la entrada $\land$ vamos al estado $G_1$, con la entrada $q$ vamos al estado $G_1$. Como el estado final es de aceptación, la cadena es aceptada.
+
+
+
+    \item[(b)] $\textbf{True} \land \lnot(p \lor q)$
+    \item[(c)] $\lnot(x \land y) \lor (p \land q)$
+\end{enumerate}
